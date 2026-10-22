@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}｜{{ site.name }}{% endblock %}
+{% block description %}{{ post.summary }}{% endblock %}
+{% block extrahead %}<meta property="og:type" content="article"><meta property="og:title" content="{{ post.title }}"><meta property="og:description" content="{{ post.summary }}"><meta property="og:url" content="{{ canonical }}">{% if post.cover %}<meta property="og:image" content="{{ post.canonical_cover }}">{% endif %}<link rel="canonical" href="{{ canonical }}">{% endblock %}
+{% block content %}
+<article><div class="article-heading wrap-narrow"><a class="back" href="{{ base }}">← 返回首頁</a><div class="article-meta"><a href="{{ base }}category/{{ post.category|urlencode }}/">{{ post.category }}</a> <span>／</span> {{ post.date_label }}</div><h1>{{ post.title }}</h1>{% if post.subtitle %}<p class="article-subtitle">{{ post.subtitle }}</p>{% endif %}<div class="author-bar"><span>文字／{{ post.author }}</span><span>{{ post.date_label }}</span></div></div>
+{% if post.cover %}<figure class="article-cover wrap"><img src="{{ post.cover_url }}" alt="{{ post.title }}">{% if post.cover_caption %}<figcaption>{{ post.cover_caption }}</figcaption>{% endif %}</figure>{% endif %}
+<div class="article-body wrap-narrow">{{ post.html|safe }}</div>
+<div class="article-ending wrap-narrow"><div class="ending-mark">◆</div><p>本文由 {{ site.name }} 發布</p><a href="{{ base }}">← 閱讀更多報導</a></div></article>
+{% endblock %}

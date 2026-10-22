@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f5f0">
+<title>{% block title %}{{ site.name }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
+<link rel="stylesheet" href="{{ base }}assets/style.css">
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }} RSS" href="{{ base }}feed.xml">
+{% block extrahead %}{% endblock %}
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="{{ base }}" class="brand"><span class="brand-name">{{ site.name }}</span><span class="brand-eng">{{ site.english_name }}</span></a>
+<nav aria-label="主選單"><a href="{{ base }}">首頁</a>{% for category in site.categories %}<a href="{{ base }}category/{{ category|urlencode }}/">{{ category }}</a>{% endfor %}<a class="nav-admin" href="{{ base }}admin/">編輯登入 ↗</a></nav>
+<button class="menu" type="button" aria-label="展開選單" aria-expanded="false" onclick="let n=document.querySelector('nav');let x=n.classList.toggle('open');this.setAttribute('aria-expanded',String(x))">☰</button>
+</div></header>
+<main>{% block content %}{% endblock %}</main>
+<footer><div class="footer-inner"><div><strong>{{ site.name }}</strong><p>{{ site.tagline }}</p></div><div class="footer-links"><a href="{{ base }}feed.xml">RSS 訂閱</a><a href="{{ base }}admin/">編輯後台</a><span>© {{ year }} {{ site.name }}</span></div></div></footer>
+</body></html>

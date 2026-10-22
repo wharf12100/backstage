@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{{ site.name }}｜{{ site.tagline }}{% endblock %}
+{% block content %}
+<section class="masthead wrap"><div class="eyebrow"><span class="red-dot"></span> INDEPENDENT JOURNALISM <span class="mast-date">{{ today }}</span></div><h1>看見事件，<em>讀懂時代。</em></h1><p>{{ site.tagline }}</p></section>
+<div class="wrap"><div class="section-head"><span>焦點報導</span><small>FEATURED STORIES</small></div>
+{% if posts %}{% set lead=posts[0] %}
+<a class="hero" href="{{ base }}posts/{{ lead.slug }}/"><div class="hero-visual {% if not lead.cover %}art-default{% endif %}">{% if lead.cover %}<img src="{{ lead.cover_url }}" alt="{{ lead.title }}">{% else %}<span>BEYOND<br>THE SCENE<span class="small-art">Stories that matter.</span></span>{% endif %}</div><div class="hero-copy"><div class="article-meta">{{ lead.category }} <span>／</span> {{ lead.date_label }}</div><h2>{{ lead.title }}</h2>{% if lead.subtitle %}<p class="subtitle">{{ lead.subtitle }}</p>{% endif %}<p>{{ lead.summary }}</p><div class="readmore">閱讀全文 <span>↗</span></div></div></a>
+{% endif %}
+<div class="section-head below"><span>最新文章</span><small>THE LATEST</small></div>
+<div class="article-grid">{% for post in posts[1:] %}<a class="article-card" href="{{ base }}posts/{{ post.slug }}/"><div class="card-image {% if not post.cover %}card-art{% endif %}">{% if post.cover %}<img src="{{ post.cover_url }}" alt="">{% else %}<span>{{ '%02d'|format(loop.index + 1) }}</span>{% endif %}</div><div class="article-meta">{{ post.category }} <span>／</span> {{ post.date_label }}</div><h3>{{ post.title }}</h3><p>{{ post.summary }}</p><div class="card-author">{{ post.author }}</div></a>{% endfor %}</div>
+{% if posts|length == 1 %}<div class="empty-state">更多文章正在寫作中。使用編輯後台新增一篇文章，這裡就會自動更新。</div>{% endif %}
+</div>
+{% endblock %}
